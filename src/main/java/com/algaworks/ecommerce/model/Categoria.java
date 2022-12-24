@@ -24,4 +24,5 @@ public class Categoria {
 
     @Column(name = "categoria_pai_id")
     private  Integer categoriaPaiId;
+
 }
