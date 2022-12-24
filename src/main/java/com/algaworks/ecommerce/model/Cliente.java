@@ -3,6 +3,7 @@ package com.algaworks.ecommerce.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Objects;
+
 @Entity
 public class Cliente {
 
