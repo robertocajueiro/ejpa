@@ -33,8 +33,10 @@ public class RelacionamentoManyToOneTest extends EntityManagerTest {
 
     @Test
     public void verificarRelacionamentoItemPedido(){
-        Produto produto = entityManager.find(Produto.class, 1);
+        entityManager.getTransaction().begin();
+
         Cliente cliente = entityManager.find(Cliente.class, 1);
+        Produto produto = entityManager.find(Produto.class, 1);
 
         Pedido pedido = new Pedido();
         pedido.setStatus(StatusPedido.AGUARDANDO);
@@ -45,20 +47,26 @@ public class RelacionamentoManyToOneTest extends EntityManagerTest {
         ItemPedido itemPedido = new ItemPedido();
 //        itemPedido.setPedidoId(pedido.getId()); IdClass
 //        itemPedido.setProdutoId(produto.getId()); idClass
-        itemPedido.setId(new ItemPedidoId(pedido.getId(), produto.getId()));
+//        itemPedido.setId(new ItemPedidoId(pedido.getId(), produto.getId()));
+        itemPedido.setId(new ItemPedidoId());
         itemPedido.setPrecoProduto(produto.getPreco());
         itemPedido.setQuantidade(1);
         itemPedido.setPedido(pedido);
         itemPedido.setProduto(produto);
 
-        entityManager.getTransaction().begin();
+//        entityManager.getTransaction().begin();
+//        entityManager.persist(pedido);
+//        entityManager.persist(itemPedido);
+//        entityManager.getTransaction().commit();
+
         entityManager.persist(pedido);
         entityManager.persist(itemPedido);
         entityManager.getTransaction().commit();
 
         entityManager.clear();
 
-        ItemPedido itemPedidoVerificacao = entityManager.find(ItemPedido.class, itemPedido.getId());
+        ItemPedido itemPedidoVerificacao = entityManager.find(
+                ItemPedido.class, new ItemPedidoId(pedido.getId(), produto.getId()));
         Assert.assertNotNull(itemPedidoVerificacao.getPedido());
         Assert.assertNotNull(itemPedidoVerificacao.getProduto());
     }
