@@ -7,6 +7,6 @@ public class DDLTest extends EntityManagerTest {
 
     @Test
     public void gerarDDL(){
-        
+
     }
 }
