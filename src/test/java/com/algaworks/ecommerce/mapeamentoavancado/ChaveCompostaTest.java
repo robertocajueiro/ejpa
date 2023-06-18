@@ -17,6 +17,7 @@ public class ChaveCompostaTest extends EntityManagerTest {
         Produto produto = entityManager.find(Produto.class, 1);
 
         Pedido pedido = new Pedido();
+        pedido.setDataCriacao(LocalDateTime.now());
         pedido.setCliente(cliente);
         pedido.setDataCriacao(LocalDateTime.now());
         pedido.setStatus(StatusPedido.AGUARDANDO);
@@ -47,7 +48,7 @@ public class ChaveCompostaTest extends EntityManagerTest {
     }
 
     @Test
-    public void bucarItem() {
+    public void buscarItem() {
         ItemPedido itemPedido = entityManager.find(
                 ItemPedido.class, new ItemPedidoId(1, 1));
 

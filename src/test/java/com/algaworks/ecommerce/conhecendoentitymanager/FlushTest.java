@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class FlushTest extends EntityManagerTest {
 
-    @Test//(expected = Exception.class)
+    @Test(expected = Exception.class)
     public void chamarFlush() {
         try {
             entityManager.getTransaction().begin();
